@@ -28,7 +28,7 @@ cd sea_battle
 git checkout main
 ```
 3. Для использовния проекта, нужно установить все используемые в нем модули, лучше использовать виртуальное окружение:
->  ```python -m venv venv```
+>  ```python -m venv venv```  
 > For Linux and MacOs:  
 > ```source venv/bin/activate```  
 > For Windows:  
