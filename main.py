@@ -1,10 +1,10 @@
-from class_System.System import *
+from src.System.System import System
 
 
 if __name__ == "__main__":
 
     system = System()
 
-    system.bind_click()
+    system.interface.bind_click()
 
-    system.process()
+    system.interface.process()
