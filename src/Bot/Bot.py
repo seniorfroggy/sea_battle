@@ -13,9 +13,13 @@ class Bot:
 
     @staticmethod
     def generate_coordinates(range_):
+        """this func generates a pair of coordinates in chosen range
+            returns them as a list of 2 elements"""
         return [randrange(0, range_), randrange(0, range_)]
 
     def generate_ships(self):
+        """this func randomly generates ship's coordinates
+            returns True if generation ended successfully else False"""
         self.ships = []
         for ship_size in LIST_OF_SHIPS:
 

@@ -10,6 +10,7 @@ class Player:
         self.sys = sys
 
     def add_ship_position(self, xc, yc):
+        """this func adds given coordinates to currently constructed ship"""
         if not self.sys.get_field().are_coords_valid(xc, yc):
             self.sys.get_interface().show_warning()
             return

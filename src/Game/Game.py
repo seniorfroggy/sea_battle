@@ -11,6 +11,8 @@ class Game:
         self.sys = sys
 
     def is_ship_valid(self, coords):
+        """this func checks if a ship can be constructed from the given coordinates
+            returns true if can else false"""
         coords.sort()
         setx = set()
         sety = set()
@@ -40,6 +42,7 @@ class Game:
         return self.sys.get_field().does_ship_fit(coords, True)
 
     def create_ship(self, coords, field):
+        """this func takes coordinates and creates a ship there"""
         ship = Ship(coords, Status.alive.name)
         for i in range(len(coords)):
             xy = coords[i]
@@ -53,6 +56,7 @@ class Game:
             self.sys.get_bot().ships.append(ship)
 
     def start(self):
+        """this func sets bot ships if their generation ended unsuccessfully, outputs rules and starts in-game music"""
         self.sys.get_interface().hide_warning()
         self.sys.get_interface().delete_by_tag("temp")
         attempt = 0
@@ -76,12 +80,14 @@ class Game:
         self.sys.get_interface().play_sound("src/music/pirates2.mp3")
 
     def end(self):
+        """this func outputs a text in the end of the game depending on its result"""
         res = ("LOST!" if self.sys.get_bot().remaining_ships != 0 else "WON!")
         color = ("red" if res == "LOST!" else "green")
         self.sys.get_interface().output_result(res, color)
         self.status = GameStatus.finished.name
 
     def make_shot(self, xc, yc):
+        """this func takes a pair of coordinates and shows warning/calls change_cell_status() depending on the arguments"""
         if (BOT_FIELD_SHIFT > xc >= DEFAULT_SIZE) or not (0 <= yc < DEFAULT_SIZE) or\
                 (self.sys.get_game().player_turn and (xc < DEFAULT_SIZE or xc > BOT_FIELD_SHIFT + 9)):
 
@@ -96,6 +102,7 @@ class Game:
         self.check_game_finished()
 
     def check_game_finished(self):
+        """this func checks if one of the players has lost all the ships and calls end() if one was found"""
         if self.sys.get_bot().remaining_ships * self.sys.get_player().remaining_ships == 0:
             self.end()
 

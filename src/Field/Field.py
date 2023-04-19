@@ -14,9 +14,13 @@ class Field:
 
     @staticmethod
     def are_coords_valid(xc, yc):
+        """this func takes a pair of coordinates and checks if they are in between default range
+            return if the above statement is true or false"""
         return 0 <= xc < DEFAULT_SIZE and 0 <= yc < DEFAULT_SIZE
 
     def is_ship_destroyed(self, xc, yc):
+        """this func takes a pair of coordinates and checks if the ship they belong to is destroyed
+            returns true if it is else false"""
         cnt = 0
         field = (self.bot_field if self.sys.get_game().player_turn else self.player_field)
         while xc + 1 < DEFAULT_SIZE and (field[xc + 1][yc].status == Status.alive.name or
@@ -35,6 +39,7 @@ class Field:
         return cnt == 0
 
     def change_cell_status(self, xc, yc):
+        """this func takes a pair of coordinates and calls one of the functions depending on the given arguments"""
         on_players_field = True
         if xc > 10:
             on_players_field = False
@@ -68,6 +73,7 @@ class Field:
                 self.sys.get_interface().change_number_of_ships()
 
     def change_bot_cell_status(self, xc, yc):
+        """this func takes two coordinates and changes appropriate cell status depending on its current"""
         if self.sys.get_field().bot_field[xc][yc].status == Status.blank.name:
             self.sys.get_field().bot_field[xc][yc].status = Status.miss.name
 
@@ -88,6 +94,8 @@ class Field:
                 self.sys.get_bot().remaining_ships -= 1
 
     def does_ship_fit(self, coords, flag):
+        """this func takes ship coordinates checks if this ship can be correctly placed on the given coordinates
+            returns true if can else false"""
         if flag:
             field_ = self.sys.get_field().player_field
         else:
